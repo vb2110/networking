@@ -13,7 +13,7 @@ def webServer(port=13331):
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f.read() # reads the file contents Fill in start
-            connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n".encode(UTF-8))
+            connectionSocket.sendall(b"HTTP/1.1 200 OK\r\ncontent-type: text/html\r\n\r\n")
             # connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n","UTF-8"))
             for i in range(0, len(outputdata)):
                 connectionSocket.send(outputdata[i].encode())
@@ -21,7 +21,7 @@ def webServer(port=13331):
             connectionSocket.close()
         except IOError:
             # connectionSocket.send('\nHTTP/1.1 404 Not Found\r\n\r\n'.encode('utf-8'))
-            connectionSocket.send(bytes("HTTP/1.1 404 Not Found\r\n\r\n","UTF-8"))
+            connectionSocket.sendall(b"HTTP/1.1 404 Not Found\r\n\r\n"))
             connectionSocket.close()
     serverSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
