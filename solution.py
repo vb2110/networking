@@ -7,12 +7,12 @@ def webServer(port=13331):
     serverSocket.listen(1)
     while True:
         print('Ready to serve...')
-        connectionSocket, addr = serverSocket.accept()  #Fill in start      #Fill in end
+        connectionSocket, addr = serverSocket.accept()  #Fill in start 
         try:
             message = connectionSocket.recv(4096)
             filename = message.split()[1]
             f = open(filename[1:])
-            outputdata = f.read() # reads the file contents Fill in start     #Fill in end
+            outputdata = f.read() # reads the file contents Fill in start
             connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
             for i in range(0, len(outputdata)):
                 connectionSocket.send(outputdata[i].encode())
