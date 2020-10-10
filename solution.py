@@ -2,12 +2,10 @@ from socket import *
 
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
-    msg = "\r\n hello smtp"
+    msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
 
     # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-    # mailserver = ("smtp.gmail.com", 587)
-    mailserver = ("smtp.nyu.edu", 25)
 
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
@@ -31,16 +29,11 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and print server response.
     # Fill in start
-    # mailfromcommand = '<vb2110@nyu.edu>\r\n'
-    # SMTP.Client.Socket.send(mailfromcommand)
-    # received = clientSocket.recv(1024).decode()
-    # print received
-
-    sending ="MAIL FROM:<vb2110@nyu.edu>\r\n"
+    sending = "MAIL FROM:<vb2110@nyu.edu>\r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     if received[:3] != '250':
-        print('250 reply not received')
+    #    print('250 reply not received')
     # Fill in end
 
     # Send RCPT TO command and print server response.
@@ -50,7 +43,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     received = clientSocket.recv(1024).decode()
     print(received)
     if received[:3] != '250':
-        print('250 reply not received')
+    #    print('250 reply not received')
     # Fill in end
 
     # Send DATA command and print server response.
@@ -58,14 +51,14 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     sending = "DATA\r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
-    print(sending + received)
+    # print(sending + received)
     # Fill in end
 
     # Send message data.
     # Fill in start
     sending = "Subject: Hello SMTP lab\r\nbye bye\r\n"
     clientSocket.send(sending.encode())
-    print(sending)
+    # print(sending)
     # Fill in end
 
     # Message ends with a single period.
@@ -73,7 +66,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     sending = ".\r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
-    print(sending + received)
+    # print(sending + received)
     # Fill in end
 
     # Send QUIT command and get server response.
@@ -81,7 +74,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     sending = "QUIT\r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
-    print(sending + received)
+    # print(sending + received)
     clientSocket.close()
     # Fill in end
 
