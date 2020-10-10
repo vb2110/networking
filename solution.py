@@ -18,41 +18,40 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     heloCommand = 'HELO Alice\r\n'
     clientSocket.send(heloCommand.encode())
     recv1 = clientSocket.recv(1024).decode()
-    
+
     # Send MAIL FROM command and print server response.
     # Fill in start
     sending = 'MAIL FROM: <vb2110@nyu.edu>\r\n'
     clientSocket.send(sending.encode())
-    received = clientSocket.recv(1024).decode()
+    recv2 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send RCPT TO command and print server response.
     # Fill in start
-    sending = "RCPT TO: <vb2110@nyu.edu>\r\n"
+    sending = 'RCPT TO: <vb2110@nyu.edu> \r\n'
     clientSocket.send(sending.encode())
-    received = clientSocket.recv(1024).decode()
+    recv3 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send DATA command and print server response.
     # Fill in start
     sending = "DATA \r\n"
     clientSocket.send(sending.encode())
-    received = clientSocket.recv(1024).decode()
+    recv4 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
 
     # Send message data.
     # Fill in start
-    sending = "Subject: Hello SMTP lab \r\n bye bye\r\n"
-    clientSocket.send(sending.encode())
+    #sending = "Subject: Hello SMTP lab \r\n bye bye\r\n"
+    clientSocket.send(msg.encode())
     # print(sending)
     # Fill in end
 
     # Message ends with a single period.
     # Fill in start
-    sending = ". \r\n"
-    clientSocket.send(sending.encode())
-    received = clientSocket.recv(1024).decode()
+    clientSocket.send(endmsg.encode())
+    recv5 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
 
@@ -60,7 +59,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Fill in start
     sending = "QUIT \r\n"
     clientSocket.send(sending.encode())
-    received = clientSocket.recv(1024).decode()
+    # received = clientSocket.recv(1024).decode()
     # print(sending + received)
     clientSocket.close()
     # Fill in end
