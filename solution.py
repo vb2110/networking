@@ -28,15 +28,15 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send RCPT TO command and print server response.
     # Fill in start
-    sending = 'RCPT TO: <vb2110@nyu.edu> \r\n'
-    clientSocket.send(sending.encode())
+    rcpt = 'RCPT TO: <vb2110@nyu.edu> \r\n'
+    clientSocket.send(rcpt.encode())
     recv3 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send DATA command and print server response.
     # Fill in start
-    sending = "DATA \r\n"
-    clientSocket.send(sending.encode())
+    data = "DATA \r\n"
+    clientSocket.send(data.encode())
     recv4 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
@@ -51,14 +51,14 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Message ends with a single period.
     # Fill in start
     clientSocket.send(endmsg.encode())
-    recv5 = clientSocket.recv(1024).decode()
+    # recv5 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
 
     # Send QUIT command and get server response.
     # Fill in start
-    sending = "QUIT \r\n"
-    clientSocket.send(sending.encode())
+    quit = "QUIT \r\n"
+    clientSocket.send(quit.encode())
     # received = clientSocket.recv(1024).decode()
     # print(sending + received)
     clientSocket.close()
