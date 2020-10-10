@@ -11,7 +11,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Fill in start
     clientSocket = socket(AF_INET, SOCK_STREAM)
-    clientSocket.connect(mailserver,port)
+    clientSocket.connect(mailserver, port)
     # Fill in end
 
     # Send HELO command and print server response.
@@ -21,21 +21,21 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     
     # Send MAIL FROM command and print server response.
     # Fill in start
-    sending = 'MAIL FROM:<vb2110@nyu.edu>\r\n'
+    sending = 'MAIL FROM: <vb2110@nyu.edu>\r\n'
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send RCPT TO command and print server response.
     # Fill in start
-    sending = "RCPT TO:<vb2110@nyu.edu>\r\n"
+    sending = "RCPT TO: <vb2110@nyu.edu>\r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send DATA command and print server response.
     # Fill in start
-    sending = "DATA\r\n"
+    sending = "DATA \r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     # print(sending + received)
@@ -43,14 +43,14 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send message data.
     # Fill in start
-    sending = "Subject: Hello SMTP lab\r\nbye bye\r\n"
+    sending = "Subject: Hello SMTP lab \r\n bye bye\r\n"
     clientSocket.send(sending.encode())
     # print(sending)
     # Fill in end
 
     # Message ends with a single period.
     # Fill in start
-    sending = ".\r\n"
+    sending = ". \r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     # print(sending + received)
@@ -58,7 +58,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send QUIT command and get server response.
     # Fill in start
-    sending = "QUIT\r\n"
+    sending = "QUIT \r\n"
     clientSocket.send(sending.encode())
     received = clientSocket.recv(1024).decode()
     # print(sending + received)
