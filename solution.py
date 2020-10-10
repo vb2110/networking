@@ -51,13 +51,13 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Message ends with a single period.
     # Fill in start
     clientSocket.send(endmsg.encode())
-    recv5 = clientSocket.recv(1024).decode()
+    # recv5 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
 
     # Send QUIT command and get server response.
     # Fill in start
-    semdQuit = "QUIT \r\n"
+    semdQuit = "QUIT\r\n"
     clientSocket.send(semdQuit.encode())
     clientSocket.close()
     # Fill in end
