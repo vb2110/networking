@@ -21,22 +21,22 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and print server response.
     # Fill in start
-    sending = 'MAIL FROM: <vb2110@nyu.edu>\r\n'
-    clientSocket.send(sending.encode())
+    sendFrom = 'MAIL FROM: <vb2110@nyu.edu> \r\n'
+    clientSocket.send(sendFrom.encode())
     recv2 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send RCPT TO command and print server response.
     # Fill in start
-    rcpt = 'RCPT TO: <vb2110@nyu.edu> \r\n'
-    clientSocket.send(rcpt.encode())
+    sendRcpt = 'RCPT TO: <vb2110@nyu.edu> \r\n'
+    clientSocket.send(sendRcpt.encode())
     recv3 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send DATA command and print server response.
     # Fill in start
-    datacommand = "DATA \r\n"
-    clientSocket.send(datacommand.encode())
+    sendData = "DATA \r\n"
+    clientSocket.send(sendData.encode())
     recv4 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
@@ -51,19 +51,18 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Message ends with a single period.
     # Fill in start
     clientSocket.send(endmsg.encode())
-    recv6 = clientSocket.recv(1024).decode()
+    # recv5 = clientSocket.recv(1024).decode()
     # print(sending + received)
     # Fill in end
 
     # Send QUIT command and get server response.
     # Fill in start
-    quiting = "QUIT \r\n"
-    clientSocket.send(quiting.encode())
+    sendQuit = "QUIT \r\n"
+    clientSocket.send(sendQuit.encode())
     # received = clientSocket.recv(1024).decode()
     # print(sending + received)
     clientSocket.close()
     # Fill in end
-
 
 if __name__ == '__main__':
     smtp_client(1025, '127.0.0.1')
