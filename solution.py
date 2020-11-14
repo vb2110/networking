@@ -110,19 +110,14 @@ def sendOnePing(mySocket, destAddr, ID):
     myChecksum = checksum(header + data)
 
     # Get the right checksum, and put in the header
-
     if sys.platform == 'darwin':
         # Convert 16-bit integers from host to network  byte order
         myChecksum = htons(myChecksum) & 0xffff
     else:
         myChecksum = htons(myChecksum)
-
-
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
     packet = header + data
-
     mySocket.sendto(packet, (destAddr, 1))  # AF_INET address must be tuple, not str
-
 
     # Both LISTS and TUPLES consist of a number of objects
     # which can be referenced by their position number within the object.
@@ -136,11 +131,9 @@ def doOnePing(destAddr, timeout):
     myID = os.getpid() & 0xFFFF  # Return the current process i
     sendOnePing(mySocket, destAddr, myID)
     rttdata.pktsSent += 1
-
     delay = receiveOnePing(mySocket, myID, timeout, destAddr)
     mySocket.close()
     return delay
-
 
 def ping(host, timeout=1):
     # timeout=1 means: If one second goes by without a reply from the server,  	# the client assumes that either the client's ping or the server's pong is lost
@@ -150,6 +143,7 @@ def ping(host, timeout=1):
     print("Pinging " + dest + " using Python:")
     print("")
     # Calculate vars values and return them
+    #  vars = 
     # Send ping requests to a server separated by approximately one second
     stdevDelay = []
 
