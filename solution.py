@@ -44,25 +44,25 @@ def build_packet():
     # then finally the complete packet was sent to the destination.
 
     # Make the header in a similar way to the ping exercise.
-    
-    MyChecksum = 0
-    MyPID = os.getpid() & 0xFFFF
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, MyChecksum, MyPID, 1)
+    myChecksum = 0
+    myID = os.getpid() & 0xFFFF
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     data = struct.pack("d", time.time())
 
     # Append checksum to the header.
-    MyChecksum = checksum(header + data)
+    myChecksum = checksum(header + data)
     if sys.platform == 'darwin':
-        MyChecksum = htons(MyChecksum) & 0xffff
+        myChecksum = htons(myChecksum) & 0xffff
     else:
-        MyChecksum = htons(MyChecksum)
+        myChecksum = htons(myChecksum)
 
     # Don’t send the packet yet , just return the final packet in this function.
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, MyChecksum, MyPID, 1)
-   
+
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     #Fill in end
 
     # So the function ending should look like this
+
     packet = header + data
     return packet
 
@@ -79,8 +79,8 @@ def get_route(hostname):
             # Make a raw socket named mySocket
             icmp = getprotobyname("icmp")
             mySocket = socket(AF_INET, SOCK_RAW, icmp)
-            
             #Fill in end
+
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
             mySocket.settimeout(TIMEOUT)
             try:
@@ -113,7 +113,6 @@ def get_route(hostname):
                 #Fetch the icmp type from the IP packet
                 icmpHeader = recPacket[20:28]
                 icmpType, icmpCode, icmpChecksum, icmpPacketID, icmpSeqNumber = struct.unpack('bbHHh', icmpHeader)
-               
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
@@ -130,6 +129,7 @@ def get_route(hostname):
                     #You should add your responses to your lists here
                     tracelist1.append(" %d   rtt=%.0f ms %s" % (ttl, (timeReceived - t) * 1000, addr[0]))
                     tracelist2.append(tracelist1)
+
                     #Fill in end
                 elif types == 3:
                     bytes = struct.calcsize("d")
