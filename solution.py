@@ -117,7 +117,7 @@ def get_route(hostname):
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    getHost = ("hostname not returnable")
+                    getHost = ("host does not provide a hostname")
                     #Fill in end
 
                 if types == 11:
@@ -142,19 +142,14 @@ def get_route(hostname):
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here and return your list if your destination IP is met
-                    tracelist1.append("%d, %.0fms, %s, %s" % (ttl, (timeReceived - timeSent)*1000, addr[0], getHost))
+                    tracelist1.append(" %d   rtt=%.0f ms %s", ttl,(timeReceived -t)*1000, addr[0])
                     tracelist2.append(tracelist1)
-                    if addr[0] == destAddr:
-                        return tracelist2
-                    else:
-                        print(tracelist2)
-                        return tracelist2
+                    return tracelist2
                     #Fill in end
                 else:
                     #Fill in start
                     #If there is an exception/error to your if statements, you should append that to your list here
-                    tracelist1.append("error")
-                    tracelist2.append(tracelist1)
+                    tracelist2.append("Error")
                     #Fill in end
                 break
             finally:
