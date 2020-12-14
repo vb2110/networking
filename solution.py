@@ -44,8 +44,8 @@ def build_packet():
     # then finally the complete packet was sent to the destination.
 
     # Make the header in a similar way to the ping exercise.
-    myPID = os.getpid() & 0xFFFF
     myChecksum = 0
+    myPID = os.getpid() & 0xFFFF
     # Append checksum to the header.
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myPID, 1)
     data = struct.pack("d", time.time())
@@ -75,7 +75,8 @@ def get_route(hostname):
 
             #Fill in start
             # Make a raw socket named mySocket
-            mySocket = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP)
+            icmp = socket.getprotobyname("icmp")
+            mySocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, icmp)
             #Fill in end
 
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
