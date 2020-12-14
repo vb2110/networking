@@ -12,7 +12,7 @@ def welcome_assignment_answers(question):
        answer = "no"
        return (answer)
    elif question == "Is it possible to decode a message without a key? - Yes/No":
-       answer = "no"
+       answer = "yes"
        return (answer)
    elif question == "Is a hashed message supposed to be un-hashed? - Yes/No":
         answer = "no"
